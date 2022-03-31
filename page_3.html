@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="Evaluación diagnóstica de Introducción al Desarrollo Front End con HTML, CSS y JavaScript" />
+        <meta name="keywords" content="HTML, CSS, JavaScript" />
+        <meta name="author" content="Antonia Valdebenito Matta" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="style.css" rel="stylesheet" />
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@500&display=swap" rel="stylesheet">
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"
+            integrity="sha512-N4kV7GkNv7QR7RX9YF/olywyIgIwNvfEe2nZtfyj73HdjCUkAfOBDbcuJ/cTaN04JKRnw1YG1wnUyNKMsNgg3g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+      <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                background: white;
+                color: black	;
+                font-family: 'M PLUS 1', sans-serif;
+            }
+            div {
+                padding: 2rem;
+            }
+            h1 {
+
+              font-size: calc(2rem + 10vw);
+              padding: 2rem 4 2rem 4;
+              font-family: 'M PLUS 1', sans-serif
+            }
+            p {
+                padding: 1rem 0;
+                color: black;
+                font-size: 10px;
+            }
+            @media (min-width: 800px) {
+                p {
+                    max-width: 60%;
+                }
+            }
+        </style>
+        <title>EVALUACION *01</title>
+    </head>
+    <body>
+
+        <div id="uno"><strong><a href="index.html">PORTADA</a></strong></div>
+        <div id="otro"><a href="page_1.html">01</a> / <a href="page_2.html">02</a> / <a href="page_3.html">03</a></div>
+
+
+
+      <p>Pero al final todo lo que se aprende se va mezclando y se avanza.</p>
+        <script>
+
+
+          var btn;
+          let snowflakes = [];
+            function setup() {
+                createCanvas(400, 600);
+  fill(300);
+  noStroke();
+
+btn = createButton('Descargar');
+  btn.position(10,10);
+  btn.mousePressed(impresora);
+
+
+            }
+            function draw() {
+                background('black');
+  let t = frameCount / 60; // update time
+
+  // create a random number of snowflakes each frame
+  for (let i = 0; i < random(5); i++) {
+    snowflakes.push(new snowflake()); // append snowflake object
+  }
+
+  // loop through snowflakes with a for..of loop
+  for (let flake of snowflakes) {
+    flake.update(t); // update snowflake position
+    flake.display(); // draw snowflake
+  }
+}
+
+          function snowflake() {
+  // initialize coordinates
+  this.posX = 0;
+  this.posY = random(-50, 0);
+  this.initialangle = random(0, 2 * PI);
+  this.size = random(2, 5);
+
+  // radius of snowflake spiral
+  // chosen so the snowflakes are uniformly spread out in area
+  this.radius = sqrt(random(pow(width / 2, 2)));
+            this.update = function(time) {
+    // x position follows a circle
+    let w = 0.6; // angular speed
+    let angle = w * time + this.initialangle;
+    this.posX = width / 2 + this.radius * sin(angle);
+
+    // different size snowflakes fall at slightly different y speeds
+    this.posY += pow(this.size, 0.5);
+
+    // delete snowflake if past end of screen
+    if (this.posY > height) {
+      let index = snowflakes.indexOf(this);
+      snowflakes.splice(index, 1);
+    }
+  };
+
+  this.display = function() {
+    ellipse(this.posX, this.posY, this.size);
+  };
+}
+
+            function windowResized() {
+                resizeCanvas(windowWidth - 50, windowHeight - 50);
+            }
+          function impresora(){
+  saveCanvas("imagen", "jpg");
+  }
+        </script>
+    </body>
+</html>
