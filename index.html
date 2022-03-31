@@ -58,13 +58,17 @@
       <p>Elegí adaptar estos ejemplos de p5.js porque representan como se siente mi mente en esta clase...se me ha hecho dificil seguirle el ritmo.</p>
         <script>
           var opciones = ["EVALUACION","ENTREGA"," PRUEBA","DIAGNOSTICO"];
+
+          var btn;
             function setup() {
                 createCanvas(windowWidth - 50, windowHeight - 50)
                     .position(25, 30)
                     .style("z-index", -1);
                document.getElementById("numero").textContent += "*01";
                 document.getElementById("evaluacion").textContent += random(opciones);
-
+btn = createButton('Descargar');
+  btn.position(10,10);
+  btn.mousePressed(impresora);
 
 
             }
@@ -77,6 +81,9 @@
             function windowResized() {
                 resizeCanvas(windowWidth - 50, windowHeight - 50);
             }
+          function impresora(){
+  saveCanvas("imagen", "jpg");
+  }
         </script>
     </body>
 </html>
